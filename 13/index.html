@@ -58,6 +58,24 @@
       };
     }
 
+    var slideImages=document.querySelectorAll('.slide-in');
+
+    function checkSlide(e){
+      slideImages.forEach(slideImage=>{
+        var slideInAt=(window.scrollY+window.innerHeight)-slideImage.height/2;
+        var imageBottom=slideImage.offsetTop+slideImage.height;
+        var isHalfShown=slideInAt>slideImage.offsetTop;
+        var isNotScrolledPast=window.scrollY<imageBottom;
+        if(isHalfShown&&isNotScrolledPast){
+          slideImage.classList.add('active');
+        }else{
+          slideImage.classList.remove('active');
+        }
+      })
+    }
+
+    window.addEventListener('scroll',debounce(checkSlide));
+
   </script>
 
   <style>
